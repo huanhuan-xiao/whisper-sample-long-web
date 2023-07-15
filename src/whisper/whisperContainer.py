@@ -200,9 +200,9 @@ class WhisperCallback(AbstractWhisperCallback):
         if self.model_container.compute_type in ["fp16", "float16"]:
             decodeOptions["fp16"] = True
 
-        initial_prompt = self.prompt_strategy.get_segment_prompt(segment_index, prompt, detected_language) \
-                           if self.prompt_strategy else prompt
-
+        # initial_prompt = self.prompt_strategy.get_segment_prompt(segment_index, prompt, detected_language) \
+        #                    if self.prompt_strategy else prompt
+        initial_prompt ="以下是普通话的句子"
         result = model.transcribe(audio, \
             language=self.language if self.language else detected_language, task=self.task, \
             initial_prompt=initial_prompt, \

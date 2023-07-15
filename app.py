@@ -265,7 +265,7 @@ class WhisperTranscriber:
                         progressListener: ProgressListener = None, **decodeOptions: dict):
         
         initial_prompt = decodeOptions.pop('initial_prompt', None)
-
+        #initial_prompt = decodeOptions.pop('initial_prompt', "以下是普通话的句子")#初始提示
         if progressListener is None:
             # Default progress listener
             progressListener = ProgressListener()
@@ -584,8 +584,10 @@ if __name__ == '__main__':
     default_whisper_implementation = os.environ.get("WHISPER_IMPLEMENTATION", default_app_config.whisper_implementation)
 
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument("--input_audio_max_duration", type=int, default=default_app_config.input_audio_max_duration, \
-                        help="Maximum audio file length in seconds, or -1 for no limit.") # 600
+    #parser.add_argument("--input_audio_max_duration", type=int, default=default_app_config.input_audio_max_duration, \
+                        #help="Maximum audio file length in seconds, or -1 for no limit.") # 600输入音频的最长时间为十分钟，设置为-1时没有限制。
+    parser.add_argument("--input_audio_max_duration", type=int, default="-1", \
+                        help="Maximum audio file length in seconds, or -1 for no limit.")
     parser.add_argument("--share", type=bool, default=default_app_config.share, \
                         help="True to share the app on HuggingFace.") # False
     parser.add_argument("--server_name", type=str, default=default_app_config.server_name, \
